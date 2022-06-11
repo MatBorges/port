@@ -17,7 +17,7 @@
 <body class="body-login">
     <header class="header-container">
         <nav>
-            <a href="index.html" class="logo"><img src="img/logotipoWhite.png" width="250px" alt="Mateus Borges Desenvolvedor"></a>
+            <a href="index.php" class="logo"><img src="img/logotipoWhite.png" width="250px" alt="Mateus Borges Desenvolvedor"></a>
             <ul>
                 <li><a href="index.php">HOME</a></li>
                 <li><a href="index.php#objetivo">OBJETIVO</a></li>

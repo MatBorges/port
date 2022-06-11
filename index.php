@@ -1,3 +1,7 @@
+<?php
+    include('conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -92,18 +96,48 @@
             </div>   
         </section>
         <section id="contato" class="contato">      
-            <form class="form-contato" action="" method="POST">
+            <form class="form-contato rounded" action="" method="POST">
                 <h2>Contato</h2>
+
+                <!-- PHP -->
+                <?php
+                    if(isset($_POST['nome']) || isset($_POST['email']) || isset($_POST['motivo'])){
+
+                        if(strlen($_POST['nome']) == 0){
+                            echo "Preencha seu nome!!";
+                        }
+                        elseif(strlen($_POST['email']) == 0){
+                            echo "Preencha sua email!!";
+                        }
+                        elseif(strlen($_POST['motivo']) == 0){
+                            echo "Informe o motivo do contato!!";
+                        }
+                        else{
+                            $nome = $mysqli->real_escape_string($_POST['nome']);
+                            $email = $mysqli->real_escape_string($_POST['email']);
+                            $motivo = $mysqli->real_escape_string($_POST['motivo']);
+
+                            $sql = "INSERT INTO contatos VALUES (DEFAULT, '$nome', '$email', '$motivo')";
+
+                            if($mysqli->query($sql) === TRUE){
+                                $_SESSION['enviado'] = true;
+                            }
+                            $mysqli->close();
+                            // header('Location: index.php#contato');
+                        }
+                    }
+                ?>
+
                 <div class="col-10 mt-3 form-floating mb-3">
-                    <input type="text" name="nome-contato" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                     <label for="floatingInput">Nome</label>
                 </div>
                 <div class="col-10 mt-3 form-floating mb-3">
-                    <input type="email" name="email-contato" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="col-10 mt-3 form-floating">
-                    <textarea name="motivo-contato" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <textarea name="motivo" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required></textarea>
                     <label for="floatingTextarea2">Me informe o motivo do contato..</label>
                 </div>
                 <button type="submit" class="col-10 btn btn-success mt-3">Enviar</button>

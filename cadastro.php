@@ -1,3 +1,7 @@
+<?php
+    include('conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,16 +29,58 @@
     <section class="container">
         <form class="form-login" action="" method="POST">
             <h1>Cadastre-se</h1>
+
+            <!-- PHP -->
+            <?php
+                if(isset($_POST['nome']) || isset($_POST['email']) || isset($_POST['senha'])){
+
+                    if(strlen($_POST['nome']) == 0){
+                        echo "Preencha seu nome!!";
+                    }
+                    elseif(strlen($_POST['email']) == 0){
+                        echo "Preencha sue email!!";
+                    }
+                    elseif(strlen($_POST['senha']) == 0){
+                        echo "Preencha sua senha!!";
+                    }
+                    else{
+                        $nome = $mysqli->real_escape_string($_POST['nome']);
+                        $email = $mysqli->real_escape_string($_POST['email']);
+                        $senha = $mysqli->real_escape_string($_POST['senha']);
+
+                        $sql = "SELECT COUNT(*) AS TOTAL FROM usuarios WHERE email_usuario = '$email'";
+                        $result = $mysqli->query($sql) or die("Falha na execução do código SQL: " . $mysqli->error);
+                        $row = mysqli_fetch_assoc($result);                       
+
+                        if($row['total'] == 1){
+                            $_SESSION['usuario_existe'] = true;
+                            header('Location: cadastro.php');                    
+                            exit;
+                        }
+
+                        $sql = "INSERT INTO usuarios VALUES (DEFAULT, '$nome', '$email', '$senha')";
+
+                        if($mysqli->query($sql) === TRUE){
+                            $_SESSION['cadastrado'] = true;
+
+                        }
+
+                        $mysqli->close();
+                        header('Location: cadastro.php');
+                    }
+                }
+            ?>
+
             <div class="col-10 mt-3 form-floating mb-3">
-                <input type="text" name="nome-cadastro" class="form-control" id="floatingInput" placeholder="Nome">
+                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Nome" required>
                 <label for="floatingInput">Seu Nome</label>
             </div>
             <div class="col-10 form-floating mb-3">
-                <input type="email" name="email-cadastro" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                 <label for="floatingInput">Cadastre um email</label>
             </div>
             <div class="col-10 form-floating">
-                <input type="password" name="senha-cadastro" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" name="senha" class="form-control" id="floatingPassword" placeholder="Password" required>
                 <label for="floatingPassword">Crie uma password</label>
             </div>
             <button type="submit" class="col-10 btn btn-primary mt-3">Entrar</button>
