@@ -1,3 +1,8 @@
+<?php
+    require_once 'usuario.php';
+    $usuario = new Usuario();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -102,15 +107,15 @@
             <form class="form-contato">
                 <h2>Contato</h2>
                 <div class="col-10 mt-3 form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="text" name="nome-contato" class="form-control" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Nome</label>
                 </div>
                 <div class="col-10 mt-3 form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" name="email-contato" class="form-control" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="col-10 mt-3 form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <textarea name="motivo-contato" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                     <label for="floatingTextarea2">Me informe o motivo do contato..</label>
                 </div>
                 <button type="button" class="col-10 btn btn-success mt-3">Enviar</button>

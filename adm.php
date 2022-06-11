@@ -14,7 +14,7 @@
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Mateus Borges | Cadastro</title>
+    <title>Mateus Borges | Login</title>
 </head>
 <body class="body-login">
     <header class="header-container">
@@ -29,20 +29,9 @@
             </ul>
         </nav>
     </header>    
-    <div class="container-login">
-        <form class="form-login">
-            <h1>Cadastre-se</h1>
-            <div class="col-10 mt-3 form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Cadastre um email</label>
-            </div>
-            <div class="col-10 form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Crie uma password</label>
-            </div>
-            <button type="button" class="col-10 btn btn-primary mt-3">Entrar</button>
-        </form>
-    </div>    
+    <section class="container">
+        <button type="button" class="col-4 btn btn-danger">Logout</button>
+    </section>    
     <footer class="rodape">
         <span>Desenvolvido por Mateus Borges &copy;</span>
     </footer>
